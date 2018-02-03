@@ -189,13 +189,13 @@ exit:
 	return;
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
 static void pwr_state_check_handler(struct timer_list *t)
 #else
 static void pwr_state_check_handler(void *FunctionContext)
 #endif
 {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
 	struct rtw_adapter *padapter =
 		from_timer(padapter, t,
 			   pwrctrlpriv.pwr_state_check_timer);
@@ -823,7 +823,7 @@ void rtw_init_pwrctrl_priv(struct rtw_adapter *padapter)
 
 	pwrctrlpriv->tog = 0x80;
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
 	timer_setup(&pwrctrlpriv->pwr_state_check_timer, pwr_state_check_handler, 0);
 #else
 	_init_timer(&(pwrctrlpriv->pwr_state_check_timer), padapter->pnetdev,
